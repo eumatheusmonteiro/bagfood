@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#EA1D2C" />
+    <title>iFood Entregador - Endere&ccedil;o</title>
+    <meta
+      name="description"
+      content="Consulte a disponibilidade da Bag iFood na sua regi&atilde;o."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style-dados.css" />
+    <script src="backguard.js"></script>
+  </head>
+
+  <body data-page="cep">
+    <header class="header">
+      <div class="logo-container">
+        <img
+          src="assets/ifoodentregadores.webp"
+          alt="iFood Entregador"
+          class="ifood-logo ifood-logo--wide"
+        />
+      </div>
+    </header>
+
+    <noscript class="no-js"
+      >Para continuar, ative o JavaScript no navegador.</noscript
+    >
+
+    <main class="container">
+      <section class="step" aria-hidden="false">
+        <div class="step-header">
+          <span class="step-count">Disponibilidade regional</span>
+          <div class="progress-bar">
+            <div class="progress" style="width: 80%"></div>
+          </div>
+        </div>
+
+        <h2>Verifique a disponibilidade</h2>
+        <p>Informe seu CEP para consultar o estoque na sua regi&atilde;o.</p>
+
+        <div id="cep-error" class="form-error hidden" role="alert"></div>
+
+        <div class="data-form">
+          <div class="input-group">
+            <input
+              id="cep-input"
+              class="floating-input"
+              type="tel"
+              placeholder=" "
+              maxlength="9"
+              inputmode="numeric"
+              autocomplete="postal-code"
+            />
+            <label class="floating-label" for="cep-input">CEP</label>
+          </div>
+
+          <button id="btn-buscar-cep" class="btn-primary" type="button">
+            Verificar disponibilidade
+          </button>
+
+          <div id="cep-loading" class="loading-row hidden" role="status">
+            <span class="spinner spinner--sm" aria-hidden="true"></span>
+            <span>Consultando disponibilidade...</span>
+          </div>
+
+          <div id="address-result" class="address-card hidden">
+            <span class="address-icon" aria-hidden="true">&#128205;</span>
+            <div>
+              <strong id="addr-street">Endere&ccedil;o encontrado</strong>
+              <p id="addr-city"></p>
+            </div>
+          </div>
+
+          <div id="address-extra" class="address-extra-card hidden">
+            <div class="input-group">
+              <input
+                id="addr-number"
+                class="address-extra-input"
+                type="text"
+                placeholder="N&uacute;mero"
+                inputmode="numeric"
+                autocomplete="address-line2"
+              />
+            </div>
+            <label class="address-extra-checkline">
+              <input id="no-number" type="checkbox" />
+              <span>Endere&ccedil;o sem n&uacute;mero</span>
+            </label>
+
+            <div class="input-group">
+              <input
+                id="addr-complement"
+                class="address-extra-input"
+                type="text"
+                placeholder="Complemento"
+                autocomplete="address-line2"
+              />
+            </div>
+            <label class="address-extra-checkline">
+              <input id="no-complement" type="checkbox" />
+              <span>Sem complemento</span>
+            </label>
+
+            <div class="input-group">
+              <input
+                id="addr-reference"
+                class="address-extra-input"
+                type="text"
+                placeholder="Ponto de refer&ecirc;ncia (opcional)"
+              />
+            </div>
+          </div>
+
+          <div id="freight-calculation" class="freight-box hidden">
+            <div class="freight-row">
+              <span>Disponibilidade</span>
+              <strong>Bag dispon&iacute;vel na sua regi&atilde;o</strong>
+            </div>
+            <button id="btn-confirm-address" class="btn-primary" type="button">
+              Confirmar endere&ccedil;o
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <footer class="footer">
+      <p>© 2026 iFood. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

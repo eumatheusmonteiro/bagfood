@@ -1,0 +1,13 @@
+BAGFOOD - PROJETO CONSOLIDADO
+
+Abra index.html para iniciar.
+
+Páginas reunidas:
+- index.html
+- quiz.html
+- dados.html
+- processando.html
+- sucesso.html
+
+Os arquivos de estilo, scripts, imagens e vídeo estão na mesma pasta do projeto.
+Observação: os ZIPs enviados não continham endereco.html nem checkout.html, embora o script original faça referência a essas etapas.
