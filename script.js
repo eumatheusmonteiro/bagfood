@@ -1,7 +1,7 @@
 const CHECKOUTS = {
-    bag: 'COLOCAR_LINK_DA_BAG',
-    bau: 'COLOCAR_LINK_DO_BAU',
-    kit: 'COLOCAR_LINK_DO_KIT'
+    bag: 'https://checkout.bagpagamento.online/VCCL1O8SD7PE',
+    bau: 'https://checkout.bagpagamento.online/VCCL1O8SD7LW',
+    kit: 'https://checkout.bagpagamento.online/VCCL1O8SD7PD'
 };
 
 const questions = {
