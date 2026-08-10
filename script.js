@@ -1,3 +1,9 @@
+const CHECKOUTS = {
+    bag: 'COLOCAR_LINK_DA_BAG',
+    bau: 'COLOCAR_LINK_DO_BAU',
+    kit: 'COLOCAR_LINK_DO_KIT'
+};
+
 const questions = {
     start: {
         id: 'start',
@@ -1638,13 +1644,17 @@ function initSuccess() {
             showToast('Escolha 1 item para continuar.', 'error');
             return;
         }
+        const checkoutKey = reward.id === 'kit_entregador' ? 'kit' : reward.id;
+        const checkoutSelecionado = CHECKOUTS[checkoutKey];
+        if (!checkoutSelecionado) return;
+
         trackLead('success_cta', {
             stage: 'success',
             reward,
             amount: getRewardExtraPrice(reward)
         });
         setStage('checkout');
-        redirect('checkout.html');
+        window.location.href = checkoutSelecionado;
     });
 }
 
