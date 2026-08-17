@@ -1082,28 +1082,28 @@ function initPersonal() {
             return;
         }
 
-        if (!validateCPF(cpfValue)) {
+        if (cpf && !validateCPF(cpfValue)) {
             showInlineError(errorBox, 'CPF inválido. Verifique os números digitados.');
             return;
         }
 
-        if (!isValidEmail(emailValue)) {
+        if (email && !isValidEmail(emailValue)) {
             showInlineError(errorBox, 'Digite um e-mail válido.');
             return;
         }
 
-        if (!isValidPhone(phoneValue)) {
+        if (phone && !isValidPhone(phoneValue)) {
             showInlineError(errorBox, 'Digite um telefone válido com DDD.');
             return;
         }
 
         savePersonal({
+            ...personal,
             name: nameValue,
-            cpf: cpfValue,
             birth: birthValue,
-            email: emailValue,
-            phone: phoneValue,
-            phoneDigits: phoneValue.replace(/\D/g, '')
+            ...(cpf ? { cpf: cpfValue } : {}),
+            ...(email ? { email: emailValue } : {}),
+            ...(phone ? { phone: phoneValue, phoneDigits: phoneValue.replace(/\D/g, '') } : {})
         });
         sessionStorage.removeItem(STORAGE_KEYS.directCheckout);
         trackLead('personal_submitted', {
@@ -1846,8 +1846,7 @@ function initCheckout() {
         `;
     }
 
-    const personalMissing =
-        !personal || !personal.name || !personal.cpf || !personal.birth || !personal.email || !personal.phone;
+    const personalMissing = !personal || !personal.name || !personal.birth;
 
     if (directCheckout && personalMissing) {
         if (summaryBlock) summaryBlock.classList.add('hidden');
@@ -3840,13 +3839,7 @@ function buildBackRedirectUrl(pageOverride) {
     const pix = loadPix();
     const pixPaid = isPixPaid(pix);
     const pixPending = !!pix && !pixPaid;
-    const hasPersonalCore = !!(
-        personal?.name &&
-        personal?.cpf &&
-        personal?.birth &&
-        personal?.email &&
-        personal?.phone
-    );
+    const hasPersonalCore = !!(personal?.name && personal?.birth);
     const hasAddress = !!address;
     const hasShipping = !!shipping;
     const hasPix = !!pix;
@@ -9679,7 +9672,7 @@ function isDirectCheckoutMode() {
 function requirePersonal() {
     if (isDirectCheckoutMode()) return true;
     const personal = loadPersonal();
-    if (!personal || !personal.name || !personal.cpf || !personal.birth || !personal.email || !personal.phone) {
+    if (!personal || !personal.name || !personal.birth) {
         redirect('dados.html');
         return false;
     }
